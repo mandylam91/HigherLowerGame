@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Higher/Lower Game</title>
+</head>
+<body>
+
+<h1>Welcome to the Higher/Lower Game</h1>
+
+<p>Rules : The computer has generated a random whole number between 0 and 10. You have three guesses to guess it. Good Luck! </p>
+
+<!-- Create an input field for the user, which allows values 0-10 -->
+
+<div>
+  <label for="userGuess">Quantity (between 0 and 10):</label>
+  <br>
+  <input type="number" id="userGuess" class="form-control form-rounded" min="0" max="10">
+  <br>
+  <br>
+  <button type="button" id="submitGuess" class="btn main">Submit guess</button>
+</div>
+
+<p id="randomNo"></p>
+<p id="userGuess"></p>
+<p id="result"></p>
+
+<script>
+
+// Use Javascript Math.random() to generate a random number between 1 and 10.
+const randomNumber = Math.floor((Math.random() * 10) + 1);
+  console.log(randomNumber);
+
+// Add event listener to submit button to check number function
+const submitButton = document.getElementById("submitGuess"); 
+submitButton.addEventListener("click", function(){
+  submitGuess()
+});
+
+let count = 0;
+
+function submitGuess(){
+  //get the user guess 
+  let userGuess = document.getElementById("userGuess").value;
+  count +=1 ; 
+  console.log(`count = ${count}`);
+  console.log(`userguess = ${userGuess}`);
+  // Check to see if number is outwith range, if not check userGuess against random value
+  if (userGuess <0 || userGuess>10 ){
+    alert("Your value isnt between 0 and 10, please enter a different value")
+  }
+   else{  
+    if(count<3){
+      checkGuess(userGuess, randomNumber);
+    }
+    else{
+      alert(`You have exceeded your maximum guesses. The correct number was ${randomNumber}. Please refresh page to start again`)
+    }
+   }
+}
+
+  // Function to compare users guess to the computer generated random number
+function checkGuess(userGuess, randomNumber)
+  {
+  if (userGuess == randomNumber){
+    feedback = "Congratulations!! You guessed the random number correctly! ";
+  }
+  else if (userGuess < randomNumber){
+    feedback = `You guessed ${userGuess}! The correct answer is higher`;
+  }
+  else if (userGuess > randomNumber){
+    feedback = `You guessed ${userGuess}! The correct answer is lower`;
+  }
+
+document.getElementById("userGuess").innerHTML = `Your Guess was ${userGuess}`;
+document.getElementById("result").innerHTML = feedback;   
+
+}
+
+
+</script>
+
+
+
+
+    
+</body>
+</html>
