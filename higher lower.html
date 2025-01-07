@@ -22,8 +22,6 @@
   <button type="button" id="submitGuess" class="btn main">Submit guess</button>
 </div>
 
-<p id="randomNo"></p>
-<p id="userGuess"></p>
 <p id="result"></p>
 
 <script>
@@ -46,11 +44,12 @@ function submitGuess(){
   count +=1 ; 
   console.log(`count = ${count}`);
   console.log(`userguess = ${userGuess}`);
-  // Check to see if number is outwith range, if not check userGuess against random value
+  // Check to see if number is outwith range, if outwith range, throw an alert with error.  If within range check userGuess against random value generated
   if (userGuess <0 || userGuess>10 ){
     alert("Your value isnt between 0 and 10, please enter a different value")
   }
    else{  
+    // Count to see how many times user has guessed. If user guesses more than 3 times, show an alert so they refresh page
     if(count<3){
       checkGuess(userGuess, randomNumber);
     }
@@ -81,9 +80,5 @@ document.getElementById("result").innerHTML = feedback;
 
 </script>
 
-
-
-
-    
 </body>
 </html>
